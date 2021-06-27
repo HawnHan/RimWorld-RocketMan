@@ -35,6 +35,7 @@
   <RocketMan.ShowIcon>显示RocketMan按钮/图标</RocketMan.ShowIcon>
   <RocketMan.ShowIcon.Description>因受游戏限制，部分设置无法在游戏主界面的Mod选项中配置。</RocketMan.ShowIcon.Description>
   <RocketMan.ProgressBar>游戏开始时显示启动进度条</RocketMan.ProgressBar>
+  <RocketMan.ProgressBar.Pause>RocketMan启动完毕后暂停游戏</RocketMan.ProgressBar.Pause>
   <RocketMan.ProgressBar.Description>开启此选项会在你载入新地图时显示启动进度条。</RocketMan.ProgressBar.Description>
   <RocketMan.Junk>垃圾清理配置</RocketMan.Junk>
   <RocketMan.CorpseRemoval>启用自动清除尸体</RocketMan.CorpseRemoval>
