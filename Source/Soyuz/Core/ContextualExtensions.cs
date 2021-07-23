@@ -71,11 +71,12 @@ namespace Soyuz
 
         public static void BeginTick(this Pawn pawn)
         {
+            Context.PartiallyDilatedContext = false;
+
             Context.CurRaceSettings = pawn.GetRaceSettings();
             Context.CurJobSettings = pawn.GetCurJobSettings();
 
             _stopwatch.Restart();
-
             _finilizePhase = false;
             _pawnTick = pawn;
 
@@ -147,7 +148,6 @@ namespace Soyuz
                     return WorldPawnsTicker.IsCustomWorldTickInterval(thing, interval);
                 return (thing.thingIDNumber + GenTicks.TicksGame) % RoundTransform(interval) == 0;
             }
-
             return (thing.thingIDNumber + GenTicks.TicksGame) % interval == 0;
         }
 
@@ -175,6 +175,7 @@ namespace Soyuz
             if (false
                 || (pawn.thingIDNumber + tick) % 30 == 0
                 || (tick % 250 == 0)
+                || (tick % 103 == 0)
                 || (pawn.jobs?.curJob?.expiryInterval > 0 && (tick - pawn.jobs.curJob.startTick) % (pawn.jobs.curJob.expiryInterval) == 0))
                 return true;
 
@@ -208,16 +209,20 @@ namespace Soyuz
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static bool IsBeingThrottled(this Pawn pawn)
         {
-            if (_throttledPawn == pawn)
+            if (!Context.PartiallyDilatedContext)
+            {
+                if (_throttledPawn == pawn)
+                    return _isBeingThrottled;
+
+                if (pawn == null || pawn != Current)
+                    return false;
+
+                _throttledPawn = pawn;
+                _isBeingThrottled = IsValidThrottleablePawn(pawn);
+
                 return _isBeingThrottled;
-
-            if (pawn == null || pawn != Current)
-                return false;
-
-            _throttledPawn = pawn;
-            _isBeingThrottled = IsValidThrottleablePawn(pawn);
-
-            return _isBeingThrottled;
+            }
+            return false;
         }
 
         private static bool IsValidThrottleablePawn(Pawn pawn)
@@ -240,7 +245,7 @@ namespace Soyuz
 
         private static bool IsValidHuman(Pawn pawn)
         {
-            if (Context.CurJobSettings.throttleFilter == JobThrottleFilter.Animals || Context.CurJobSettings.def == JobDefOf.DoBill)
+            if (Context.CurJobSettings.throttleFilter == JobThrottleFilter.Animals)
                 return false;
             if (GenTicks.TicksGame - (pawn.jobs?.curJob?.startTick ?? 0) <= 30)
                 return false;

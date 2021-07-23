@@ -29,45 +29,61 @@ namespace Soyuz
             {
                 fullyThrottledJobs = new JobDef[]
                 {
-                    JobDefOf.Clean,
-                    JobDefOf.HaulToCell,
                     JobDefOf.Goto,
                     JobDefOf.LayDown,
-                    JobDefOf.Wait,
-                    JobDefOf.Wait_Wander,
                     JobDefOf.GotoWander,
+                    JobDefOf.Wait_Wander,
+                    JobDefOf.Flick,
                 };
             }
             if (partiallyThrottledJobs == null)
             {
                 partiallyThrottledJobs = new JobDef[]
                 {
+                    JobDefOf.Clean,
+                    JobDefOf.ClearSnow,
+                    JobDefOf.Research,
                     JobDefOf.Wait,
-                    JobDefOf.Wait_Wander,
+                    JobDefOf.Follow,
+                    JobDefOf.FollowClose,
+                    JobDefOf.Sow,
+                    JobDefOf.CutPlant,
+                    JobDefOf.CutPlantDesignated,
+                    JobDefOf.HaulToCell,
+                    JobDefOf.HaulToContainer,
+                    JobDefOf.Harvest,
+                    JobDefOf.HarvestDesignated,
+                    JobDefOf.Mine,
+                    JobDefOf.DoBill,
+                    JobDefOf.Ingest,
+                    JobDefOf.Repair,
+                    JobDefOf.BuildRoof,
+                    JobDefOf.Meditate,
+                    JobDefOf.Maintain,
+                    JobDefOf.FinishFrame,
+                    JobDefOf.HaulToTransporter,
+                    JobDefOf.PlantSeed,
+                    JobDefOf.RearmTurret,
+                    JobDefOf.RemoveFloor,
+                    JobDefOf.RemoveRoof,
+                    JobDefOf.Deconstruct,
+                    JobDefOf.SmoothWall,
+                    JobDefOf.SmoothFloor,
+                    JobDefOf.Uninstall,
+                    JobDefOf.OperateDeepDrill,
+                    JobDefOf.Repair,
                 };
             }
             if (notThrottledJobs == null)
             {
                 notThrottledJobs = new JobDef[]
                 {
-                    JobDefOf.Sow,
-                    JobDefOf.CutPlant,
-                    JobDefOf.CutPlantDesignated,
-                    JobDefOf.Harvest,
-                    JobDefOf.HarvestDesignated,
-                    JobDefOf.SocialRelax,
-                    JobDefOf.Mine,
-                    JobDefOf.Follow,
-                    JobDefOf.FollowClose,
-                    JobDefOf.FinishFrame,
-                    JobDefOf.Refuel,
-                    JobDefOf.DoBill,
-                    JobDefOf.Ingest,
-                    JobDefOf.TakeInventory,
                     JobDefOf.DeliverFood,
                     JobDefOf.FeedPatient,
+                    JobDefOf.SocialRelax,
+                    JobDefOf.Refuel,
+                    JobDefOf.TakeInventory,
                     JobDefOf.Capture,
-                    JobDefOf.Repair,
                     JobDefOf.AttackMelee,
                     JobDefOf.AttackStatic,
                     JobDefOf.CastAbilityOnThing,

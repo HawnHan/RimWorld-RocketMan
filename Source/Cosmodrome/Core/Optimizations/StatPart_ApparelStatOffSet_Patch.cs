@@ -10,17 +10,20 @@ namespace RocketMan.Optimizations
     public static class StatPart_ApparelStatOffSet_Skipper_Patch
     {
         private static float curValue;
+
         private static int curKey = -1;
+
         private static bool skip;
+
         private static readonly CachedDict<int, Pair<float, int>> cache = new CachedDict<int, Pair<float, int>>();
 
-        [HarmonyPriority(int.MaxValue)]
         public static bool Prefix(StatPart_ApparelStatOffset __instance, StatRequest req,
             ref float val)
         {
             if (RocketPrefs.Enabled && RocketPrefs.StatGearCachingEnabled
                 && req.HasThing
                 && req.thingInt is Pawn pawn
+                && RocketStates.Context == ContextFlag.Ticking
                 && !IgnoreMeDatabase.ShouldIgnore(__instance.apparelStat))
             {
                 var stat = __instance.apparelStat ?? __instance.parentStat;
@@ -52,7 +55,6 @@ namespace RocketMan.Optimizations
             return true;
         }
 
-        [HarmonyPriority(int.MinValue)]
         public static void Postfix(StatPart_ApparelStatOffset __instance, StatRequest req,
             ref float val)
         {
